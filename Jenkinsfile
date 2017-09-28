@@ -1,9 +1,9 @@
 node {
     stage("scm") {
-        git url: 'https://github.com/ciberado/picalculator'
+        git url: 'https://github.com/dralluy/picalculator'
     }
     stage("test and build") {
-        sh "docker build -t ciberado/picalculator ."
+        sh "docker build -t dralluy/picalculator ."
     }
     stage("push") {
         withCredentials([[
@@ -12,7 +12,7 @@ node {
              usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'
         ]]) {
             sh "docker login -u $USERNAME -p $PASSWORD"
-            sh "docker push ciberado/picalculator"
+            sh "docker push dralluy/picalculator"
         }
     }
 }
