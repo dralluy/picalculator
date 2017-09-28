@@ -3,7 +3,7 @@ node {
         git url: 'https://github.com/dralluy/picalculator'
     }
     stage("test and build") {
-        sh "docker build -t dralluy/picalculator ."
+        sh "sudo docker build -t dralluy/picalculator ."
     }
     stage("push") {
         withCredentials([[
@@ -11,8 +11,8 @@ node {
              credentialsId: 'docker_hub',
              usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'
         ]]) {
-            sh "docker login -u $USERNAME -p $PASSWORD"
-            sh "docker push dralluy/picalculator"
+            sh "sudo docker login -u $USERNAME -p $PASSWORD"
+            sh "sudo docker push dralluy/picalculator"
         }
     }
 }
